@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 
 import App from '../pages';
 import Home from '../pages/Home';
-import NotFound from '../pages/NotFound'
+import NotFound from '../pages/NotFound';
 
 
 // 如果是大型项目，router部分就需要做更加复杂的配置
