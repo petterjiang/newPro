@@ -35,6 +35,11 @@
    
    webpack.production.config.js --生产环境的各项配置
    
+## 跟目录文件夹
+    
+   /app        --所有开发文件
+   
+   /test       --测试，单元测试文件
     
     
 

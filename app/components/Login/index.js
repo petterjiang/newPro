@@ -8,7 +8,6 @@ import {Input,Button,Spin} from 'antd';
 import Transition from 'react-addons-css-transition-group';
 import '../../resource/css/fade.css';
 
-
 function List (props) {
     return (
         <div>
@@ -27,10 +26,10 @@ class Login extends React.Component{
     }
     componentDidMount(){
         const obj = [{
-            name:'张',
+            name:'张三',
             listid:'0'
         },{
-            name:'李',
+            name:'李四',
             listid:'1'
         }];
         setTimeout(()=>{
@@ -39,7 +38,6 @@ class Login extends React.Component{
         },3000)
     }
     renderObj (){
-        let i=0;
         let resp = this.props.obj.map((data)=>{
             return (
                     <List name={data.name} key={data.listid} listid={data.listid} />
@@ -59,6 +57,7 @@ class Login extends React.Component{
                 <div>
                     username: {username}
                 </div>
+                ==========================================
                 <div className="errorName">
                     {errorName}
                 </div>

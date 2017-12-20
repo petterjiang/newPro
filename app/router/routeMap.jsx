@@ -3,6 +3,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 
 import App from '../pages';
 import Home from '../pages/Home';
+import About from '../pages/About';
 import NotFound from '../pages/NotFound';
 
 
@@ -15,8 +16,8 @@ class RouterMap extends React.Component {
             <Router history={this.props.history}>
                 <Route path='/' component={App}>
                     <IndexRoute component={Home} />
-                    <Route path="home" component={Home} />
-                    {/*<Route path="home" component={About} />*/}
+                    <Route path="Home" component={Home} />
+                    <Route path="About" component={About} />
                     {/*<Route path='/Login(/:router)' component={SignIn}/>*/}
                     {/*<Route path='/ProList' component={ProList}/>*/}
                     {/*<Route path='/detail/:id' component={Detail}/>*/}

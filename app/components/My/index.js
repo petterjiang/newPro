@@ -7,6 +7,8 @@ import {Button} from 'antd';
 function My({onIncrement, onDecrement, value}) {
     return (
         <div>
+            <h2>My组件</h2>
+            <p>本组件是计数器加减组件示例</p>
             <Button onClick={onIncrement}>+</Button>
             <Button onClick={onDecrement}>-</Button>
             <span>Count: {value}</span>
