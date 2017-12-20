@@ -6,7 +6,7 @@ import {Input,Button,Spin} from 'antd';
 
 //引入首次装载组件延时渲染组件和样式
 import Transition from 'react-addons-css-transition-group';
-import '../../resuoce/css/fade.css';
+import '../../resource/css/fade.css';
 
 
 function List (props) {
