@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
-    entry: path.resolve(__dirname, 'app/index.jsx'),
+    entry:["babel-polyfill",path.resolve(__dirname, 'app/index.jsx')],
     output: {
         path: path.resolve(__dirname, "build"),
         filename: "bundle.js"
@@ -41,10 +41,13 @@ module.exports = {
         // 热加载插件
         new webpack.HotModuleReplacementPlugin(),
 
-        // 可在业务 js 代码中使用 __DEV__ 判断是否是dev模式（dev模式下可以提示错误、测试报告等, production模式不提示）
+        // 可在业务 js 代码中使用 __BUILD_ENV__环境变量 判断是否是dev ,uat,production模式
         new webpack.DefinePlugin({
-          __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
-        })
+            'process.env':{
+                'NODE_ENV': JSON.stringify('dev')
+            },
+            __BUILD_ENV__: JSON.stringify('dev')
+        }),
     ],
 
     devServer: {
@@ -53,17 +56,17 @@ module.exports = {
           // koa 代码在 ./mock 目录中，启动命令为 npm run mock
           '/api': {
             //target: 'http://10.10.1.56:8081/mockjs/25',
-            target: 'http://10.10.4.61:8081/jee',
+            target: 'http://120.76.101.96:8080/jee',
             changeOrigin: true,
             secure: false
           },
             '/a': {
-                target: 'http://10.10.4.61:8081/jee',
+                target: 'http://120.76.101.96:8080/jee',
                 changeOrigin: true,
                 secure: false
             },
             '/jee': {
-                target: 'http://10.10.4.61:8081',
+                target: 'http://120.76.101.96:8080',
                 changeOrigin: true,
                 secure: false
             }

@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, 'app/index.jsx'),
+    app: ["babel-polyfill",path.resolve(__dirname, 'app/index.jsx')],
     // 将 第三方依赖 单独打包
     vendor: [
       'react', 
@@ -50,11 +50,12 @@ module.exports = {
         // favicon: __dirname+'/app/resource/images/favicon.ico',
         template: __dirname + '/app/index.tmpl.html'
     }),
-    // 定义为生产环境，编译 React 时压缩到最小
+      // 可在业务 js 代码中使用 __BUILD_ENV__环境变量 判断是否是dev ,uat,production模式
     new webpack.DefinePlugin({
       'process.env':{
         'NODE_ENV': JSON.stringify('production')
-      }
+      },
+        __BUILD_ENV__: JSON.stringify('production')
     }),
 
     // 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID

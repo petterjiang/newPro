@@ -1,76 +1,70 @@
-import $ from 'jquery';
-import Modal from './Modal';
-import {} from 'react-router';
-import { hashHistory } from 'react-router';
-import cookieCtrl from './cookieCtrl';
-import * as Interface from '../config/Interface';
+/***************************
+ * fetch请求--
+ * get:    get请求方法
+ * post:   post请求方法
+ *
+ * 参数--
+ * url:    请求地址
+ * data:   请求参数
+***************************/
+// import Modal from './Modal';
+// import { hashHistory } from 'react-router';
+// import cookieCtrl from './cookieCtrl';
+// import * as Interface from '../config/Interface';
+import 'whatwg-fetch';
+import 'es6-promise';
 
 export default {
-    post (url,data,success,error) {
-        let _this = this;
-        this.hasSession();
-        $.ajaxSetup({ cache: false });
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: data,
-            success: function(data){
-                _this.isLogin(data);
-                success(data);
-            },
-            error:error,
-            dataType: 'json'
-        });
-    },
-    //JQUERY get 请求
-    get (url,data,success,error){
-        let _this = this;
-        this.hasSession();
-        $.ajaxSetup({ cache: false });
-        $.ajax({
-            type: 'GET',
-            url: url,
-            data: data,
-            success: function(data){
-                _this.isLogin(data);
-                success(data);
-            },
-            error:error,
-            dataType: 'json'
-        });
-    },
-    //后端判断session
-    isLogin(resp){
-       if(resp.code==false){
-           if(Interface.isLogin){
-               Interface.isLogin=false;
-               Modal.info('登录超时，请重新登录！','',function(){
-                   cookieCtrl.delCookie('mobileLogin');
-                   cookieCtrl.delCookie('sessionid');
-                   hashHistory.push('/');
-               });
+   get (url,data) {
+       const selfData = this.obj2params(data);
+       return fetch(url+"?"+selfData, {
+           method: "GET",
+           credentials: 'include',
+           headers: {
+               'Accept': 'application/json, text/plain, */*',
+               'Content-Type': 'application/x-www-form-urlencoded',
+               'X-Requested-With': 'XMLHttpRequest'
            }
-           return false;
-       }else{
-           Interface.isLogin=true;
-           return true;
-       }
-    },
-    //前端判断session
-    hasSession(){
-        //console.log(cookieCtrl.getCookie('sessionid'));
-        if(!cookieCtrl.getCookie('sessionid')){
-            if(Interface.isLogin){
-                Interface.isLogin=false;
-                Modal.info('未登录，请重新登录！','',function(){
-                    hashHistory.push('/');
-                });
+       }).then(resp => {
+           if (resp.ok) {
+               return resp.json();
+           } else {
+               let error = '请求失败';
+               throw error
+           }
+       });
+   },
+    post (url,data){
+        const selfData = this.obj2params(data);
+        return fetch(url, {
+            method: "POST",
+            credentials: 'include',
+            mode: "cors",
+            redirect:"follow",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body:selfData
+        }).then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                let error = "错误代码："+resp.status+"! 错误信息："+resp.statusText;
+                throw error
             }
-            return false;
-        }else{
-            Interface.isLogin=true;
-            return true;
+        });
+    },
+    obj2params(obj) {
+        let result = '';
+        let item;
+        for (item in obj) {
+            result += '&' + item + '=' + encodeURIComponent(obj[item]);
         }
-
+        if (result) {
+            result = result.slice(1);
+        }
+        return result;
     }
 }

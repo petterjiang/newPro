@@ -1,11 +1,11 @@
-var path = require('path')
+var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, 'app/index.jsx'),
+    app: ["babel-polyfill",path.resolve(__dirname, 'app/index.jsx')],
     // 将 第三方依赖 单独打包
     vendor: [
       'react', 

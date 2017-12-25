@@ -6,7 +6,7 @@
   "scripts": {
     "start": "set NODE_ENV=dev && webpack-dev-server --progress --colors",
     "build": "(if exist build-uat rd/s/q build) && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --colors",
-    "build-uat" :"(if exist build-uat rd/s/q build-uat) && set NODE_ENV=production && webpack --config ./webpack.uat.config.js --progress --colors"
+    "build-uat": "(if exist build-uat rd/s/q build-uat) && set NODE_ENV=production && webpack --config ./webpack.uat.config.js --progress --colors"
   },
   "author": "JAMES",
   "license": "ISC",
@@ -41,6 +41,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "copy-to-clipboard": "^3.0.8",
     "crypto-js": "^3.1.9-1",
     "es6-promise": "^3.2.1",

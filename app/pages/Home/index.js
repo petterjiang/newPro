@@ -1,7 +1,7 @@
 import React from 'react';
 // import {view as Counter} from '../components/Counter';
 import My from '../../components/My/index';
-import Login from '../../components/Login';
+import LoginTest from '../../components/LoginTest';
 class Home extends React.Component {
     render (){
         return (
@@ -15,8 +15,8 @@ class Home extends React.Component {
 
                 <My />
                 =========================
-                <h2>Login组件</h2>
-                <Login />
+                <h2>LoginTest组件</h2>
+                <LoginTest />
             </div>
         )
     }
