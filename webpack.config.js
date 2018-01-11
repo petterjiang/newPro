@@ -71,6 +71,8 @@ module.exports = {
             }
         },
         port: 3000,
+        host: '0.0.0.0',//本地服务器可以使用本地IP地址访问
+        disableHostCheck: true,
         contentBase: "./public", //本地服务器所加载的页面所在的目录
         colors: true, //终端中输出结果为彩色
         historyApiFallback: true, //不跳转
