@@ -1,4 +1,4 @@
-# react + redux 自制脚手架；
+# react + redux + react-router 3自制脚手架
   本脚手架集成antd react组件库，react-redux插件。
 
 ## 本地运行条件: 
