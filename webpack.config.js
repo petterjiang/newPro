@@ -51,25 +51,14 @@ module.exports = {
     ],
 
     devServer: {
-        proxy: {
-          // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上
-          '/api': {
-            //target: 'http://10.10.1.56:8081/mockjs/25',
-            target: 'http://120.76.101.96:8080/jee',
-            changeOrigin: true,
-            secure: false
-          },
-            '/a': {
-                target: 'http://120.76.101.96:8080/jee',
-                changeOrigin: true,
-                secure: false
-            },
-            '/jee': {
-                target: 'http://120.76.101.96:8080',
-                changeOrigin: true,
-                secure: false
-            }
-        },
+        //proxy: {
+          // 跨域代理配置
+          //'/api': {
+            //target: 'http://10.10.1.56:8081/mockjs/25',//api开头的接口代理到target地址
+            //changeOrigin: true,
+            //secure: false
+          //}
+        //},
         port: 3000,
         host: '0.0.0.0',//本地服务器可以使用本地IP地址访问
         disableHostCheck: true,
